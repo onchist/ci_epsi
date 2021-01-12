@@ -40,9 +40,10 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASSWORD_VAR', usernameVariable: 'USERNAME_VAR')]) {
                         sh 'git config --global user.email "onchist@gmail.com"'
                         sh 'git config --global user.name "onchist"'
-                        PROJ_VERSION = sh (
-                            script: 'version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)'
-                        ).trim()
+                        PROJ_VERSION = sh ([
+                            script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout)',
+                            returnStdout: true
+                        ]).trim()
                         sh 'git branch release/' + PROJ_VERSION.replace('-SNAPSHOT', '')
                         sh 'git push origin release/' PROJ_VERSION.replace('-SNAPSHOT', '')
                         sh 'mvn release:prepare -gs $MAVEN_GLOBAL_SETTINGS -B -Dusername=$USERNAME_VAR -Dpassword=$PASSWORD_VAR'
