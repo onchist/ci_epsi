@@ -22,7 +22,9 @@ pipeline {
         }
 	stage('Deploy') {
             steps {
-                sh 'mvn deploy'
+                configFileProvider([configFile(fileId: 'UUID', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
+                    sh 'mvn -gs $MAVEN_GLOBAL_SETTINGS deploy'
+                }
             }
    
         }
