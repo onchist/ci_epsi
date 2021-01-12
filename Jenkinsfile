@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        booleanParam(name: 'Perform release ?', description: '', defaultValue = false)
+        booleanParam(name: 'Perform release ?', defaultValue = false)
     }
     stages {
         stage('Initialize') {
