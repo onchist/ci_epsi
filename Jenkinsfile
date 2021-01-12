@@ -38,12 +38,12 @@ pipeline {
                     [configFile(fileId: 'f8069f73-6367-4fc5-a6d6-813eb424b54d', variable: 'MAVEN_GLOBAL_SETTINGS')]
                     ) {
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASSWORD_VAR', usernameVariable: 'USERNAME_VAR')]) {
-                        bat 'git config --global user.email "onchist@gmail.com"'
-                        bat 'git config --global user.name "onchist"'
-                        bat 'git branch release/' + pom.version.replace('-SNAPSHOT', '')
-                        bat 'git push origin release/' + pom.version.replace('-SNAPSHOT', '')
-                        bat 'mvn release:prepare -gs $MAVEN_GLOBAL_SETTINGS -B -Dusername=$USERNAME_VAR -Dpassword=$PASSWORD_VAR'
-                        bat 'mvn release:perform -gs $MAVEN_GLOBAL_SETTINGS -B -Dusername=$USERNAME_VAR -Dpassword=$PASSWORD_VAR'
+                        sh 'git config --global user.email "onchist@gmail.com"'
+                        sh 'git config --global user.name "onchist"'
+                        sh 'git branch release/' + pom.version.replace('-SNAPSHOT', '')
+                        sh 'git push origin release/' + pom.version.replace('-SNAPSHOT', '')
+                        sh 'mvn release:prepare -gs $MAVEN_GLOBAL_SETTINGS -B -Dusername=$USERNAME_VAR -Dpassword=$PASSWORD_VAR'
+                        sh 'mvn release:perform -gs $MAVEN_GLOBAL_SETTINGS -B -Dusername=$USERNAME_VAR -Dpassword=$PASSWORD_VAR'
                     }
                     }
             }
