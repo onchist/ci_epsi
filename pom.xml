@@ -8,7 +8,7 @@
     </properties>
     <groupId>com.deckert</groupId>
     <artifactId>ci-epsi</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -16,9 +16,16 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
 
-
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://localhost:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://localhost:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
 </project>
